@@ -5,9 +5,10 @@
     $productCode: $('.pdp-item-review-count'),
     $price: $('.pdp-price-contianer-holder'),
     $reviews: $('.pdp-product-reviews-wrapper'),
-    // $price: $('.pdp-price-wrapper'),
-    // $rrp: $('.pdp-rrp-wrapper'),
+    $addToCart: $('.pdp-add-cart-wrapper'),
+    $addToWishlist: $('#wishlist-box').parent(),
     $title: $('.pdp-product-title'),
+    $inStockInfo: $('.instock-info-wrapper'),
 
     removeProductCode: function() {
       this.$productCode.each(function() {
@@ -19,37 +20,45 @@
       this.$price.insertAfter(this.$reviews)
     },
 
-    removeReviewsBorder: function() {
-      this.$reviews.css({border: 'none'})
-    },
-
     removeTitleMinHeight: function() {
       this.$title.css({ minHeight: 0 })
     },
 
-    rePadReviews: function() {
+    reStyleReviews: function() {
       this.$reviews.css({
+        border: 'none',
         padding: 0,
         marginBottom: '10px'
       })
+      this.removeReviewsIfNone()
     },
 
     removeReviewsIfNone: function() {
       if (this.$reviews.text().match(/0 reviews/i)) {
         this.$reviews.css({
           position: 'absolute',
-          visibility: 'hidden'
+          visibility: 'hidden',
+          left: '-9999px'
         })
       }
+    },
+
+    moveAddButtons: function() {
+      this.$addToCart.insertBefore(this.$inStockInfo)
+      this.$addToWishlist.insertAfter(this.$addToCart)
+      this.$inStockInfo.css({
+        maxHeight: 'initial',
+        minHeight: 'initial',
+        paddingBottom: '50px'
+      })
     },
 
     mangle: function() {
       this.movePrice()
       this.removeProductCode()
-      this.removeReviewsBorder()
       this.removeTitleMinHeight()
-      this.rePadReviews()
-      this.removeReviewsIfNone()
+      this.reStyleReviews()
+      this.moveAddButtons()
     }
   }
 
