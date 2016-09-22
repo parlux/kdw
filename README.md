@@ -1,4 +1,4 @@
-# KDW Scripts
+# KWH Scripts
 
 A collection of jQuery scripts that will gently manipulate the site for running A/B tests. 
 
@@ -6,4 +6,4 @@ A collection of jQuery scripts that will gently manipulate the site for running 
 
 #### TODO
 
-[ ] Ordering
+- [ ] Ordering
