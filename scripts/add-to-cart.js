@@ -47,8 +47,8 @@
       this.$addToCart.insertBefore(this.$inStockInfo)
       this.$addToWishlist.insertAfter(this.$addToCart)
       this.$inStockInfo.css({
-        maxHeight: 'initial',
-        minHeight: 'initial',
+        maxHeight: 'none',
+        minHeight: 'none',
         paddingBottom: '50px'
       })
     },
