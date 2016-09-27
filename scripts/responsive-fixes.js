@@ -66,7 +66,7 @@
     },
 
     navbarMobileRemoveNearestStore: function() {
-      $('#div__header .hidden-sm.hidden-md.hidden-lg a[href="/Find-Store"]').hide()
+      $('.hidden-sm.hidden-md.hidden-lg a[href="/Find-Store"]').hide()
     },
 
     navbarMobileMenu: function() {
