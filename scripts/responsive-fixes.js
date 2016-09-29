@@ -9,7 +9,7 @@
   var $searchBar = $('.header-search-boxwrapper')
   var $shoppingChoices = $('.shopping-choices')
   var $shoppingChoicesItems = $shoppingChoices.find('.list-group-item')
-  var $carouselContainer = $('.carousel-container')
+      var $carouselContainer = $('.carousel-container')
 
   var MANGLORD = {
     navbarMenuHideOnMobile: function() {
@@ -83,6 +83,30 @@
         '}')
     },
 
+    addMobileZoomBindings: function() {
+      if ($(window).width() < 768) {
+        $(document).ready(function() {
+          // Delay here as it needs to run AFTER the zoom has been initialised
+          setTimeout(function() {
+            MANGLORD.removeMobileZoom()
+          }, 100)
+
+          $('#pdp-carousel').on('slid.bs.carousel', function () {
+            MANGLORD.removeMobileZoom()
+          })
+        })
+      }
+    },
+
+    removeMobileZoom: function() {
+      $('.carousel-inner img').each(function() {
+        if ($(this).data().elevateZoom) {
+          $(this).data().elevateZoom.zoomContainer.remove()
+        }
+      })
+      $('.carousel-inner img').off()
+    },
+
     addStyles: function() {
       $('body').append(additionalStyles)
     }
@@ -96,5 +120,6 @@
   MANGLORD.navbarMenuInsertIntoHeader()
   MANGLORD.navbarMobileRemoveNearestStore()
   MANGLORD.navbarMobileMenu()
+  MANGLORD.addMobileZoomBindings()
   MANGLORD.addStyles()
 })()
