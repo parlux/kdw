@@ -115,7 +115,7 @@
             .html()
             .split('<br')[0] + '</div>'
 
-        var foo = '<h2>Product Information</h2>' + firstPara
+        var foo = '<h2 style="margin-top:40px;">Product Information</h2>' + firstPara
         $(foo).insertBefore('#pdp-carousel')
       }
     },
