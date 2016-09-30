@@ -2,16 +2,15 @@
 
 (function () {
   var additionalStyles = document.createElement('style')
-  var $navbarHeader = $('.navbar-header')
   var $navbarBrand = $('.navbar-brand')
   var $navbarMenu = $('.header-customer-asset')
   var $navbarMobileMenu = $('#showLeftPushMenu')
-  var $searchBar = $('.header-search-boxwrapper')
-  var $shoppingChoices = $('.shopping-choices')
-  var $shoppingChoicesItems = $shoppingChoices.find('.list-group-item')
-      var $carouselContainer = $('.carousel-container')
 
   var MANGLORD = {
+    isMobile: function() {
+      return ($(window).width()) < 768 ? true : false
+    },
+
     navbarMenuHideOnMobile: function() {
       $navbarMenu.addClass('hidden-xs')
     },
@@ -84,7 +83,7 @@
     },
 
     addMobileZoomBindings: function() {
-      if ($(window).width() < 768) {
+      if (MANGLORD.isMobile()) {
         $(document).ready(function() {
           // Delay here as it needs to run AFTER the zoom has been initialised
           setTimeout(function() {
@@ -107,6 +106,20 @@
       $('.carousel-inner img').off()
     },
 
+    getProdDescriptionFirstPara: function() {
+      if (!$('.pdp-productdetails-tab div').length) return
+
+      if (MANGLORD.isMobile()) {
+        var firstPara =
+          $('.pdp-productdetails-tab div')
+            .html()
+            .split('<br')[0] + '</div>'
+
+        var foo = '<h2>Product Information</h2>' + firstPara
+        $(foo).insertBefore('#pdp-carousel')
+      }
+    },
+
     addStyles: function() {
       $('body').append(additionalStyles)
     }
@@ -115,6 +128,7 @@
   MANGLORD.navbarMenuHideOnMobile()
   MANGLORD.navbarMenuFixWidth()
   MANGLORD.searchBarFixPadding()
+  MANGLORD.getProdDescriptionFirstPara()
   MANGLORD.carouselTablet()
   MANGLORD.navbarMobileColor()
   MANGLORD.navbarMenuInsertIntoHeader()
