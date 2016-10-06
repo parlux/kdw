@@ -1,5 +1,5 @@
+/* CUSTOM CODE */
 // jQuery script to move the add to cart button higher on the page
-
 (function () {
   var MANGLORD = {
     $productCode: $('.pdp-item-review-count'),
@@ -13,6 +13,14 @@
     removeProductCode: function() {
       this.$productCode.each(function() {
         if ($(this).text().match(/code/i)) $(this).hide()
+      })
+    },
+
+    moveProductCode: function() {
+      this.$productCode.each(function() {
+        if ($(this).text().match(/code/i)) {
+          $(this).insertAfter('.info-list-onlineonly')
+        }
       })
     },
 
@@ -30,7 +38,6 @@
         padding: 0,
         marginBottom: '10px'
       })
-      this.removeReviewsIfNone()
     },
 
     removeReviewsIfNone: function() {
@@ -55,12 +62,14 @@
 
     mangle: function() {
       this.movePrice()
-      this.removeProductCode()
+      this.moveProductCode()
       this.removeTitleMinHeight()
       this.reStyleReviews()
       this.moveAddButtons()
     }
   }
 
-  MANGLORD.mangle()
+  $(document).ready(function() {
+    MANGLORD.mangle()
+  })
 })()
